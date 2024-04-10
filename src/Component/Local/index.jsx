@@ -1,4 +1,4 @@
-import './style.css';
+import "./style.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -22,20 +22,20 @@ export default function Local() {
         );
         setLocalDate(response.data);
       } catch {
-        console.log('Error Api')
+        console.error("Error Api");
       }
     };
     Data();
   }, []);
-console.log(localDate)
-  return(
+  console.log(localDate);
+  return (
     <div>
-        {localDate &&(
-            <div>{localDate.location.name}</div>
-        )
-
-        }
-  
+      {localDate && (
+        <div>
+          <span>Local: </span><span>{localDate.location.name},{localDate.location.region},{localDate.location.country}</span>
+          
+        </div>
+      )}
     </div>
-  )
+  );
 }

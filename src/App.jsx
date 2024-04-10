@@ -2,19 +2,16 @@ import "./App.css";
 import Local from "./Component/Local";
 import Tempo from "./Component/Tempo";
 function App() {
- 
-
-  
-
   return (
-    <div className="App">
-      <h2>Informações de Clima</h2>
+    <div>
       <div className="box">
-        <div className="jutns">
+        <div>
           <Tempo />
         </div>
 
-        <div><Local /></div>
+        <div>
+          <Local />
+        </div>
       </div>
     </div>
   );

@@ -22,7 +22,9 @@ export default function Tempo() {
         );
 
         setTempoDate(response.data);
-      } catch {}
+      } catch {
+        console.error('Error Api')
+      }
     };
     Data();
   }, []);
@@ -32,17 +34,19 @@ return(
         {tempoDate && (
         <div>
              <div className="temp">
-                <span>{tempoDate.current.temp_c}°</span>
+             <div className="div-icon"><img src={tempoDate.current.condition.icon}/></div>
+                <div><span>{tempoDate.current.temp_c}°</span></div>
               </div>
-                <div>{tempoDate.current.condition.text}</div>
-            <div className="div-icon">
-            <img src={tempoDate.current.condition.icon} />
-          </div>
-          <h3>{tempoDate.current.condition.text}</h3>
-          <div>{tempoDate.current.last_updated}</div>
-            <div>{tempoDate.current.wind_kph}</div>
-            <div>{tempoDate.current.chance_of_rain}</div>
-            <div>{tempoDate.current.uv}</div>
+                <div className="texto">{tempoDate.current.condition.text}</div>
+            
+            
+          
+         
+          <div><span>Velocidade do vento: </span><span>{tempoDate.current.wind_kph}kpm</span></div>
+            
+            <div><span>{tempoDate.current.chance_of_rain}</span></div>
+           <div> <span>UV: </span><span>{tempoDate.current.uv}</span></div>
+           <div><span>Ultima atualização: </span><span>{tempoDate.current.last_updated}</span></div>
         </div>
         )}
     </div>
