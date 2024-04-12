@@ -9,11 +9,12 @@ function App() {
         <div>
           <Tempo />
         </div>
-<div><Previsao/></div>
+        
         <div>
           <Local />
         </div>
       </div>
+      <Previsao/>
     </div>
   );
 }

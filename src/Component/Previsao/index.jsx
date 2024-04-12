@@ -1,39 +1,47 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import { useState, useEffect } from "react"
-import  axios  from "axios"
+export default function Previsao() {
+  const [previsaoDate, setPrevisaoDate] = useState([]);
 
-export default function Previsao(){
-const [previsaoDate, setPrevisaoDate] = useState(null)
+  useEffect(() => {
+    const response = async () => {
+      try {
+        const date = await axios.get(
+          "http://api.openweathermap.org/data/2.5/forecast?",
+          {
+            params: {
+              appid: "8f2acecfda4778898f5147d3c193c77f",
+              q: "salvador,br",
+              lang:'pt'
+            },
+          }
+        );
+        setPrevisaoDate(date.data.list);
+      } catch {
+        console.error("error api");
+      }
+    };
+    response();
+  }, []);
 
-useEffect(() =>{
-    const response = async () =>{
-try{
-    const date = await axios.get('http://api.openweathermap.org/data/2.5/forecast?',{
-        params:{
-            appid:'8f2acecfda4778898f5147d3c193c77f',
-            q:'salvador,br',
-           
-        }
-    })
-setPrevisaoDate(date.data)
-}
-catch{
-console.error('error api')
-}
+  console.log(previsaoDate)
 
-    }
-    response()
-},[])
-console.log(previsaoDate)
-    return(
-        <div>
-        {previsaoDate.list.map((forecast, index) => (
-          <div key={index}>
-            <p>Data e hora: {forecast.dt_txt}</p>
-            <p>Temperatura: {forecast.main.temp}°C</p>
-            <p>Descrição: {forecast.weather[0].description}</p>
-          </div>
-        ))}
-      </div>
-    )
+  return (
+    <div>
+      {previsaoDate.map(item => {
+        return(
+            <div key={item.dt}>
+                 {item.weather.map(e =>{
+                    return(
+                        <div key={e.id}><img alt="icon" src={`http://openweathermap.org/img/wn/${e.icon}.png`}/></div>
+                    )
+                 })}
+               <div>{item.dt_txt}</div>
+
+            </div>
+        )
+      })}
+    </div>
+  );
 }
